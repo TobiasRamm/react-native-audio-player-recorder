@@ -1,11 +1,5 @@
 'use strict';
-
-/**
- * This module is a thin layer over the native module. It's aim is to obscure
- * implementation details for registering callbacks, changing settings, etc.
-*/
-
-var React, {NativeModules, NativeAppEventEmitter, DeviceEventEmitter, Platform} = require('react-native');
+import {NativeModules, NativeAppEventEmitter, DeviceEventEmitter, Platform} from "react-native";
 
 var AudioPlayerManager = NativeModules.AudioPlayerManager;
 var AudioRecorderManager = NativeModules.AudioRecorderManager;
@@ -52,21 +46,21 @@ var AudioPlayer = {
   setProgressSubscription: function() {
     if (this.progressSubscription) this.progressSubscription.remove();
     this.progressSubscription = DeviceEventEmitter.addListener('playerProgress',
-      (data) => {
-        if (this.onProgress) {
-          this.onProgress(data);
+        (data) => {
+          if (this.onProgress) {
+            this.onProgress(data);
+          }
         }
-      }
     );
   },
   setFinishedSubscription: function() {
     if (this.finishedSubscription) this.finishedSubscription.remove();
     this.finishedSubscription = DeviceEventEmitter.addListener('playerFinished',
-      (data) => {
-        if (this.onFinished) {
-          this.onFinished(data);
+        (data) => {
+          if (this.onFinished) {
+            this.onFinished(data);
+          }
         }
-      }
     );
   },
   getDurationFromPath: function(path) {
@@ -105,12 +99,12 @@ var AudioRecorder = {
 
     if (Platform.OS === 'ios') {
       AudioRecorderManager.prepareRecordingAtPath(
-        path,
-        recordingOptions.SampleRate,
-        recordingOptions.Channels,
-        recordingOptions.AudioQuality,
-        recordingOptions.AudioEncoding,
-        recordingOptions.MeteringEnabled
+          path,
+          recordingOptions.SampleRate,
+          recordingOptions.Channels,
+          recordingOptions.AudioQuality,
+          recordingOptions.AudioEncoding,
+          recordingOptions.MeteringEnabled
       );
     } else {
       return AudioRecorderManager.prepareRecordingAtPath(path, recordingOptions);
@@ -118,20 +112,20 @@ var AudioRecorder = {
 
     if (this.progressSubscription) this.progressSubscription.remove();
     this.progressSubscription = NativeAppEventEmitter.addListener('recordingProgress',
-      (data) => {
-        if (this.onProgress) {
-          this.onProgress(data);
+        (data) => {
+          if (this.onProgress) {
+            this.onProgress(data);
+          }
         }
-      }
     );
 
     if (this.finishedSubscription) this.finishedSubscription.remove();
     this.finishedSubscription = NativeAppEventEmitter.addListener('recordingFinished',
-      (data) => {
-        if (this.onFinished) {
-          this.onFinished(data);
+        (data) => {
+          if (this.onFinished) {
+            this.onFinished(data);
+          }
         }
-      }
     );
   },
   startRecording: function() {

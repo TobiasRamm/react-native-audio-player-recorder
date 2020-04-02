@@ -25,5 +25,11 @@
     "type": "git",
     "url": "https://github.com/Shinetechchina/react-native-audio-player-recorder.git"
   },
+  "dependencies": {
+    "merge": "^1.2.0",
+    "prop-types": "^15.6.0",
+    "react": "16.6.3",
+    "react-native": "^0.59.9"
+  },
   "nativePackage": true
 }
